@@ -2,6 +2,9 @@
   "name": "egg-userservice",
   "version": "0.0.1",
   "description": "userservice plugin for egg",
+  "eggPlugin": {
+    "name": "userservice"
+  },
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --fix",
