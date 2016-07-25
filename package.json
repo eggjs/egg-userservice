@@ -9,8 +9,15 @@
   "scripts": {
     "lint": "eslint . --fix",
     "test": "egg-bin test",
+    "cov": "egg-bin cov",
+    "ci": "npm run lint && npm run cov",
     "autod": "autod"
   },
+  "files": [
+    "app",
+    "config",
+    "app.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eggjs/egg-userservice.git"
@@ -29,8 +36,10 @@
   "dependencies": {},
   "devDependencies": {
     "autod": "^2.6.1",
+    "egg": "^0.0.6",
     "egg-bin": "^1.0.1",
     "egg-ci": "^1.0.2",
+    "egg-mock": "^0.0.3",
     "eslint": "^3.0.1",
     "eslint-config-egg": "^3.1.0",
     "should": "^9.0.2",
