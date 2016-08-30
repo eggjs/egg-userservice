@@ -8,6 +8,7 @@ module.exports = {
     'test/fixtures',
   ],
   devdep: [
+    'egg',
     'autod',
     'egg-bin',
     'eslint',

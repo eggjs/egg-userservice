@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = function(options) {
-  return function* (next) {
+module.exports = options => {
+  return function* userservice(next) {
     if (!this.user && options.service.getUser) {
       this.user = yield options.service.getUser(this);
     }

@@ -1,6 +1,5 @@
 'use strict';
 
-module.exports = function(app) {
-  const coreMiddleware = app.config.coreMiddleware;
-  coreMiddleware.push('userservice');
+module.exports = app => {
+  app.config.coreMiddleware.push('userservice');
 };
