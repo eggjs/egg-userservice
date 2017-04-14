@@ -71,6 +71,72 @@ exports.userservice = {
 }
 ```
 
+## Detail Example
+What author mean that is conveys a concept to you of 'userservice', I guess.
+You can do as follow:
+
+```js
+// config/config.default.js
+
+// Mount middleware
+// Your must do this, or you can't work well
+config.middleware = [
+  'userservice'
+];
+
+// Mount retrived user datas
+config.userservice = {
+  service: {
+    getUserId(ctx) {
+      return ctx.user && ctx.user.uid;
+    },
+    * getUser(ctx) {
+      if (!ctx.query.uid || !ctx.query.name) {
+        return null;
+      }
+      return {
+        uid: ctx.query.uid,
+        name: ctx.query.name
+      };
+    },
+  },
+};
+```
+
+
+```js
+// middleware/userservice.js
+
+// Middleware
+module.exports = options => {
+  return function *(next) {
+    if (!this.user && options.service.getUser) {
+      this.user = yield options.service.getUser(this);
+    }
+
+    if (!this.userId && options.service.getUserId) {
+      this.userId = options.service.getUserId(this);
+    }
+
+    yield next;
+  };
+};
+```
+
+
+```js
+// controller/home.js
+
+module.exports = function*() {
+  this.body = {
+    userId: this.userId,
+    user: this.user,
+  };
+};
+```
+
+That you can run your application to test!
+
 ## For complicated applications
 
 The way your application retrieving user data can be complicated, it may be very weird
