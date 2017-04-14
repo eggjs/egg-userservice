@@ -75,61 +75,60 @@ exports.userservice = {
 What author mean that is conveys a concept to you of 'userservice', I guess.
 You can do as follow:
 
-config/config.default.js
+// config/config.default.js
 ```js
 
-    // Mount middleware
-    // Your must do this, or you can't work well
-    config.middleware = [
-        'userservice'
-    ];
+// Mount middleware
+// Your must do this, or you can't work well
+config.middleware = [
+  'userservice'
+];
 
-     // Mount retrived user datas
-     config.userservice = {
-        service: {
-            getUserId(ctx) {
-                return ctx.user && ctx.user.uid;
-            },
-            * getUser(ctx) {
-                console.log('ctx', ctx);
-                if (!ctx.query.uid || !ctx.query.name) {
-                    return null;
-                }
-                return {
-                    uid: ctx.query.uid,
-                    name: ctx.query.name
-                };
-            },
-        },
-    };
+// Mount retrived user datas
+config.userservice = {
+  service: {
+    getUserId(ctx) {
+      return ctx.user && ctx.user.uid;
+    },
+    * getUser(ctx) {
+      if (!ctx.query.uid || !ctx.query.name) {
+        return null;
+      }
+      return {
+        uid: ctx.query.uid,
+        name: ctx.query.name
+      };
+    },
+  },
+};
 ```
 
-middleware/userservice.js
+// middleware/userservice.js
 ```js
-     // Middleware
-     module.exports = options => {
-         return function *(next) {
-             if (!this.user && options.service.getUser) {
-                 this.user = yield options.service.getUser(this);
-             }
+// Middleware
+module.exports = options => {
+  return function *(next) {
+    if (!this.user && options.service.getUser) {
+      this.user = yield options.service.getUser(this);
+    }
 
-             if (!this.userId && options.service.getUserId) {
-                 this.userId = options.service.getUserId(this);
-             }
+    if (!this.userId && options.service.getUserId) {
+      this.userId = options.service.getUserId(this);
+    }
 
-             yield next;
-         };
-     };
+    yield next;
+  };
+};
 ```
 
-controller/home.js
+// controller/home.js
 ```js
-     module.exports = function*() {
-         this.body = {
-             userId: this.userId,
-             user: this.user,
-         };
-     };
+module.exports = function*() {
+  this.body = {
+    userId: this.userId,
+    user: this.user,
+  };
+};
 ```
 
 That you can run your application to test!
