@@ -75,8 +75,8 @@ exports.userservice = {
 What author mean that is conveys a concept to you of 'userservice', I guess.
 You can do as follow:
 
-// config/config.default.js
 ```js
+// config/config.default.js
 
 // Mount middleware
 // Your must do this, or you can't work well
@@ -103,8 +103,10 @@ config.userservice = {
 };
 ```
 
-// middleware/userservice.js
+
 ```js
+// middleware/userservice.js
+
 // Middleware
 module.exports = options => {
   return function *(next) {
@@ -121,8 +123,10 @@ module.exports = options => {
 };
 ```
 
-// controller/home.js
+
 ```js
+// controller/home.js
+
 module.exports = function*() {
   this.body = {
     userId: this.userId,
