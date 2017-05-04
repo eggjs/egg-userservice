@@ -52,6 +52,10 @@ $ npm i egg-userservice
 
 - `ctx.user`: current user data
 - `ctx.userId`: the user id of current user
+- `app.config.userservice.service.getUser(ctx)`:  
+- `app.config.userservice.service.getUserId(ctx)`: 
+
+
 
 ## Configuration
 
@@ -59,17 +63,23 @@ Add your userservice configurations to `config/config.default.js`
 
 ```js
 exports.userservice = {
-  * getUser(ctx) {
-    // Retrieve your user data from cookie, redis, db, whatever
-    // For common web applications using cookie, you may get session id with ctx.cookies
-  },
-
-  getUserId(ctx) {
-    // The way to get userId
-    // eg. return ctx.user.userId
+  service: {
+    * getUser(ctx) {
+      // Retrieve your user data from cookie, redis, db, whatever
+      // For common web applications using cookie, you may get session id with ctx.cookies
+    },
+    
+    getUserId(ctx) {
+      // The way to get userId
+      // eg. return ctx.user.userId
+    }
   }
 }
 ```
+
+### call by api
+
+
 
 ## For complicated applications
 
