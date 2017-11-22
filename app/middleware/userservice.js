@@ -1,15 +1,19 @@
 'use strict';
 
-module.exports = options => {
-  return function* userservice(next) {
-    if (!this.user && options.service.getUser) {
-      this.user = yield options.service.getUser(this);
+module.exports = (options, app) => {
+  // both support generator function and async function
+  if (options.service.getUser) {
+    options.service.getUser = app.toAsyncFunction(options.service.getUser);
+  }
+  return async function userservice(ctx, next) {
+    if (!ctx.user && options.service.getUser) {
+      ctx.user = await options.service.getUser(ctx);
     }
 
-    if (!this.userId && options.service.getUserId) {
-      this.userId = options.service.getUserId(this);
+    if (!ctx.userId && options.service.getUserId) {
+      ctx.userId = options.service.getUserId(ctx);
     }
 
-    yield next;
+    return next();
   };
 };

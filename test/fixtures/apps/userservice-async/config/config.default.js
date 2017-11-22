@@ -5,7 +5,7 @@ exports.userservice = {
     getUserId(ctx) {
       return ctx.user && ctx.user.uid;
     },
-    * getUser(ctx) {
+    async getUser(ctx) {
       if (!ctx.query.uid || !ctx.query.name) {
         return null;
       }
