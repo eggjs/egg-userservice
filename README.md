@@ -77,6 +77,15 @@ exports.userservice = {
 }
 ```
 
+In your `config/plugin.js`
+
+```js
+exports.userservice = {
+    enable: true,
+    package: 'egg-userservice',
+};
+```
+
 
 
 
