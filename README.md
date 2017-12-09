@@ -65,13 +65,17 @@ Add your userservice configurations to `config/config.default.js`
 exports.userservice = {
   service: {
     async getUser(ctx) {
+      if (!ctx.session.user) {
+        return null;
+      }
+      ...
       // Retrieve your user data from cookie, redis, db, whatever
       // For common web applications using cookie, you may get session id with ctx.cookies
     },
 
     getUserId(ctx) {
       // The way to get userId
-      // eg. return ctx.user.userId
+      // eg. return ctx.user && ctx.user.userId
     }
   }
 }
