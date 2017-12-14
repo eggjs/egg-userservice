@@ -22,6 +22,8 @@
 
 Userservice plugin for Egg.
 
+**[DEPRECATED] use https://github.com/eggjs/egg-passport- instead.**
+
 This plugin provides a convention of how your application accesses current user data.
 
 You can define the way to retrieve current user data according to the exact user
