@@ -22,7 +22,7 @@
 
 Userservice plugin for Egg.
 
-**[DEPRECATED] use https://github.com/eggjs/egg-passport- instead.**
+**[DEPRECATED] use https://github.com/eggjs/egg-passport instead.**
 
 This plugin provides a convention of how your application accesses current user data.
 
