@@ -71,10 +71,19 @@ exports.userservice = {
 
     getUserId(ctx) {
       // The way to get userId
-      // eg. return ctx.user.userId
+      // eg. return ctx.user && ctx.user.userId
     }
   }
 }
+```
+
+In your `config/plugin.js`
+
+```js
+exports.userservice = {
+  enable: true,
+  package: 'egg-userservice',
+};
 ```
 
 
